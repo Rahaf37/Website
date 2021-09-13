@@ -1,0 +1,127 @@
+<html><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Pizza order Form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Pizza Order Form</h1>
+        <form name="order">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Pizza Size</td>
+                        <td>
+                            <input type="radio" name="size" value="10">Small
+                            <input type="radio" name="size" value="20">Medium
+                            <input type="radio" name="size" value="30">Large
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Toppings</td>
+                        <td>
+                            <input type="checkbox" name="top" value="10">Pepperoni
+                            <input type="checkbox" name="top" value="10">Chicken Tikka
+                            <input type="checkbox" name="top" value="10">Philly Steak
+                            <input type="checkbox" name="top" value="10">Chicken Steak
+                            <br>
+                            <input type="checkbox" name="top" value="2">Mushrooms
+                            <input type="checkbox" name="top" value="3">Black Olives
+                            <input type="checkbox" name="top" value="5">Jalapeno
+                            <input type="checkbox" name="top" value="5">Relish
+                            <br>
+                            <input type="checkbox" name="top" value="3">Extra Sauce
+                            <input type="checkbox" name="top" value="6">Extra Spice
+                            <input type="checkbox" name="top" value="10">Thick Crust
+                            <input type="checkbox" name="top" value="2">Super Thin
+                            <br>
+                            <input type="checkbox" name="top" value="5">Mozarella
+                            <input type="checkbox" name="top" value="6">Swiss
+                            <input type="checkbox" name="top" value="2">Cheddar
+                            <input type="checkbox" name="top" value="1">Labneh
+                            <br>
+                            <input type="checkbox" name="top" value="4">Italian Seasoning
+                            <input type="checkbox" name="top" value="3">Spanish Seasoning
+                            <input type="checkbox" name="top" value="3">Indian Seasoning
+                            <input type="checkbox" name="top" value="3">Kabsa Seasoning
+                            <br>                    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Delivery Option</td>
+                        <td>
+                            <select name="delivery">
+                                <option value="0" selected="selected">Pick-up</option>
+                                <option value="5">Delivery - Khaldiyyah</option>
+                                <option value="10">Delivery - Haradh</option>
+                                <option value="15">Delivery - Mahasin</option>
+                                <option value="30">Delivery - Mubarraz</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" onclick=" calculate(); return false" value="Calculate"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><textarea name="output" rows="5" cols="50">Select the Price &#13;&#10;Select one of the Delivery Types</textarea></td>
+                    </tr>
+                </tbody></table>
+        </form>
+
+        <script>
+            function calculate() 
+            {
+                var total = 0;
+                var flag = 0;
+                
+                var output = document.order.output;
+
+                var size = document.order.size;
+                var size_value = 0;
+                for (var i in size) 
+                {
+                    if (size[i].checked) 
+                    {
+                        size_value = size[i].value;
+                        flag = 1;
+                    }
+                }
+
+                var top = document.order.top;
+                var top_value = 0;
+                for (var i in top) 
+                {
+                    if (top[i].checked) 
+                    {
+                        top_value = 1 * top_value + top[i].value * 1;
+                        flag = 1;
+                    }
+                }
+
+                var delivery = document.order.delivery;
+                var delivery_value = delivery.value;
+                var delivery_options = delivery.options[delivery.selectedIndex].text;
+
+                if (flag == 0 && delivery_value == 0) 
+                {
+                    output.innerHTML = "Select the Price\nSelect one of the Delivery Types"
+                } 
+                else if (flag == 0) 
+                {
+                    output.innerHTML = "Select the Price";
+                } 
+                else if (delivery_value == 0) 
+                {
+                    output.innerHTML = "Select one of the Delivery Types"
+                } 
+                else 
+                {
+                    total = 1 * size_value + top_value + delivery_value * 1;
+                    output.value = "Your total order is " + total + " SAR and it will be delivered to you at " + delivery_options;
+                }
+
+            }
+        </script>
+
+
+    </body></html>
